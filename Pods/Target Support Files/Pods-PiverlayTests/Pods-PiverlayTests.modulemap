@@ -1,0 +1,6 @@
+framework module Pods_PiverlayTests {
+  umbrella header "Pods-PiverlayTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

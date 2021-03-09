@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansKR-Bold.otf">
+            <string>SourceHanSansKR-Bold</string>
+        </array>
+        <array key="SourceHanSansKR-Regular.otf">
+            <string>SourceHanSansKR-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.30000001192092896" contentMode="scaleToFill" id="Sju-4n-pr8" customClass="ResizeInputView" customModule="Piverlay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9l-li-cDS">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <connections>
+                        <action selector="touchOutside:" destination="Sju-4n-pr8" eventType="touchUpInside" id="TRQ-7V-iA3"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePY-HX-OoU" userLabel="Input Value View">
+                    <rect key="frame" x="24" y="311" width="363" height="274"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input value to resize" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bh4-aw-RVk">
+                            <rect key="frame" x="23" y="20" width="215" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="Uqs-Bx-9O1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansKR-Bold" family="Source Han Sans KR" pointSize="24"/>
+                            <color key="textColor" red="0.062745098040000002" green="0.062745098040000002" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="width" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REL-I1-4zG">
+                            <rect key="frame" x="15" y="69" width="29.5" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="29" id="myT-X7-Tml"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansKR-Bold" family="Source Han Sans KR" pointSize="12"/>
+                            <color key="textColor" red="0.23137254900000001" green="0.23137254900000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xhU-jS-xQW" userLabel="Width Text Field">
+                            <rect key="frame" x="15" y="98" width="327" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="mVb-CI-cad"/>
+                            </constraints>
+                            <color key="textColor" red="0.23137254900000001" green="0.23137254900000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="SourceHanSansKR-Regular" family="Source Han Sans KR" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFr-dz-rKr">
+                            <rect key="frame" x="15" y="145" width="33.5" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="29" id="V1X-z0-WzM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansKR-Bold" family="Source Han Sans KR" pointSize="12"/>
+                            <color key="textColor" red="0.23137254900000001" green="0.23137254900000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VA0-Wy-ROz" userLabel="Height Text Field">
+                            <rect key="frame" x="15" y="178" width="327" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="IWr-cG-5Tn"/>
+                            </constraints>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" name="SourceHanSansKR-Regular" family="Source Han Sans KR" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <real key="value" value="17.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <outlet property="delegate" destination="Sju-4n-pr8" id="YgJ-Z7-Ldy"/>
+                            </connections>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLp-J6-jUw">
+                            <rect key="frame" x="19" y="226" width="152.5" height="34"/>
+                            <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="qNo-AC-wSw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansKR-Bold" family="Source Han Sans KR" pointSize="12"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" red="0.56862745100000001" green="0.56862745100000001" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <real key="value" value="17.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="touchOutside:" destination="Sju-4n-pr8" eventType="touchUpInside" id="ocd-Bk-heX"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOK-V2-V8V">
+                            <rect key="frame" x="189.5" y="226" width="152.5" height="34"/>
+                            <color key="backgroundColor" red="0.92941176470588238" green="0.0" blue="0.396078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="lyz-nY-fCj"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansKR-Bold" family="Source Han Sans KR" pointSize="14"/>
+                            <state key="normal" title="OK">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <real key="value" value="17.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="OKButtonTouched:" destination="Sju-4n-pr8" eventType="touchUpInside" id="yk9-sl-OeG"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="rFr-dz-rKr" firstAttribute="leading" secondItem="REL-I1-4zG" secondAttribute="leading" id="0GR-5k-acm"/>
+                        <constraint firstAttribute="trailing" secondItem="SOK-V2-V8V" secondAttribute="trailing" constant="21" id="3aD-Dv-bXd"/>
+                        <constraint firstItem="REL-I1-4zG" firstAttribute="top" secondItem="bh4-aw-RVk" secondAttribute="bottom" constant="14" id="BSB-1G-BkS"/>
+                        <constraint firstItem="sLp-J6-jUw" firstAttribute="top" secondItem="VA0-Wy-ROz" secondAttribute="bottom" constant="14" id="CPz-gm-gxS"/>
+                        <constraint firstItem="bh4-aw-RVk" firstAttribute="top" secondItem="ePY-HX-OoU" secondAttribute="top" constant="20" id="DbE-3m-oCs"/>
+                        <constraint firstItem="rFr-dz-rKr" firstAttribute="top" secondItem="xhU-jS-xQW" secondAttribute="bottom" constant="13" id="Gsj-FS-oqf"/>
+                        <constraint firstItem="VA0-Wy-ROz" firstAttribute="leading" secondItem="rFr-dz-rKr" secondAttribute="leading" id="HeL-bI-2g9"/>
+                        <constraint firstItem="sLp-J6-jUw" firstAttribute="leading" secondItem="ePY-HX-OoU" secondAttribute="leading" constant="19" id="MLL-fg-fsx"/>
+                        <constraint firstItem="bh4-aw-RVk" firstAttribute="leading" secondItem="ePY-HX-OoU" secondAttribute="leading" constant="23" id="Pcy-jB-bto"/>
+                        <constraint firstItem="VA0-Wy-ROz" firstAttribute="top" secondItem="rFr-dz-rKr" secondAttribute="bottom" constant="4" id="Yj5-Hc-VdM"/>
+                        <constraint firstItem="SOK-V2-V8V" firstAttribute="width" secondItem="sLp-J6-jUw" secondAttribute="width" id="ZKm-XF-ehC"/>
+                        <constraint firstItem="SOK-V2-V8V" firstAttribute="top" secondItem="sLp-J6-jUw" secondAttribute="top" id="ZLC-f6-fyv"/>
+                        <constraint firstAttribute="height" constant="274" id="aPl-Vh-zqF"/>
+                        <constraint firstAttribute="trailing" secondItem="VA0-Wy-ROz" secondAttribute="trailing" constant="21" id="hj6-cc-DCE"/>
+                        <constraint firstItem="xhU-jS-xQW" firstAttribute="leading" secondItem="REL-I1-4zG" secondAttribute="leading" id="jTh-YF-X8f"/>
+                        <constraint firstItem="REL-I1-4zG" firstAttribute="leading" secondItem="ePY-HX-OoU" secondAttribute="leading" constant="15" id="jcq-T3-Dce"/>
+                        <constraint firstItem="sLp-J6-jUw" firstAttribute="width" secondItem="ePY-HX-OoU" secondAttribute="width" multiplier="0.42" id="kgb-4Y-abO"/>
+                        <constraint firstItem="xhU-jS-xQW" firstAttribute="trailing" secondItem="VA0-Wy-ROz" secondAttribute="trailing" id="mQx-I6-tg5"/>
+                        <constraint firstItem="xhU-jS-xQW" firstAttribute="top" secondItem="REL-I1-4zG" secondAttribute="bottom" id="rkZ-LN-TpG"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fp5-sK-JbJ"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="J9l-li-cDS" secondAttribute="bottom" id="1ee-BO-7mR"/>
+                <constraint firstItem="ePY-HX-OoU" firstAttribute="leading" secondItem="Sju-4n-pr8" secondAttribute="leading" constant="24" id="6gw-eT-g2W"/>
+                <constraint firstItem="J9l-li-cDS" firstAttribute="top" secondItem="Sju-4n-pr8" secondAttribute="top" id="KQ0-Tx-Rhi"/>
+                <constraint firstAttribute="trailing" secondItem="ePY-HX-OoU" secondAttribute="trailing" constant="27" id="ahE-M2-khO"/>
+                <constraint firstAttribute="trailing" secondItem="J9l-li-cDS" secondAttribute="trailing" id="bDW-A5-uf2"/>
+                <constraint firstItem="ePY-HX-OoU" firstAttribute="centerY" secondItem="Sju-4n-pr8" secondAttribute="centerY" id="brR-Lq-Ze8"/>
+                <constraint firstItem="J9l-li-cDS" firstAttribute="leading" secondItem="Sju-4n-pr8" secondAttribute="leading" id="ssh-QR-cYQ"/>
+            </constraints>
+            <connections>
+                <outlet property="heightTextField" destination="VA0-Wy-ROz" id="nbF-YU-NNZ"/>
+                <outlet property="inputValueView" destination="ePY-HX-OoU" id="BFh-Z3-6NT"/>
+                <outlet property="outsideButton" destination="J9l-li-cDS" id="TvO-AY-EnZ"/>
+                <outlet property="widthTextField" destination="xhU-jS-xQW" id="VX6-5a-BYF"/>
+            </connections>
+            <point key="canvasLocation" x="-6739" y="-395"/>
+        </view>
+    </objects>
+</document>
