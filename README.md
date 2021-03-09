@@ -24,8 +24,8 @@
  
  <img src="https://screenshotwc.s3.ap-northeast-2.amazonaws.com/IMG_2392.PNG" alt="drawing" width="200"/> 
  <img src="https://screenshotwc.s3.ap-northeast-2.amazonaws.com/IMG_2387.PNG" alt="drawing" width="200"/> 
-  <img src="https://screenshotwc.s3.ap-northeast-2.amazonaws.com/IMG_2389.PNG" alt="drawing" width="200"/> 
     <img src="https://screenshotwc.s3.ap-northeast-2.amazonaws.com/IMG_2388.PNG" alt="drawing" width="200"/> 
+    <img src="https://screenshotwc.s3.ap-northeast-2.amazonaws.com/IMG_2389.PNG" alt="drawing" width="200"/> 
     
 
 ## pf) Signing 정보
