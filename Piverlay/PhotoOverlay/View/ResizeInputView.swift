@@ -23,7 +23,9 @@ class ResizeInputView: UIView {
         
         //TextField layer 세팅
         widthTextField.layer.cornerRadius = 17.5
+        widthTextField.layer.borderWidth = 1
         heightTextField.layer.cornerRadius = 17.5
+        heightTextField.layer.borderWidth = 1
         
         widthTextField.delegate = self
         heightTextField.delegate = self
