@@ -29,14 +29,14 @@ class PLUtil: NSObject {
         toastView.backgroundColor = UIColorFromRGB(rgbValue: 0x3d3a45)
         toastView.alpha = 1
             //UIColor.black.withAlphaComponent(0.85)
-        toastView.layer.cornerRadius = 10;
+        toastView.layer.cornerRadius = 10
         toastView.clipsToBounds  =  true
         
         //토스트라벨 세팅
         let toastLabel = UILabel(frame: CGRect(x: 10, y: 0, width: 280, height: 80))
         toastLabel.textColor = UIColor.white
         toastLabel.font = UIFont(name: "SourceHanSansKR-Bold", size: 11)
-        toastLabel.textAlignment = .center;
+        toastLabel.textAlignment = .center
         toastLabel.text = message
         toastLabel.alpha = 1.0
         toastLabel.numberOfLines = 2
@@ -62,14 +62,14 @@ class PLUtil: NSObject {
         toastView.backgroundColor = UIColorFromRGB(rgbValue: 0x3d3a45)
         toastView.alpha = 1
             //UIColor.black.withAlphaComponent(0.85)
-        toastView.layer.cornerRadius = 10;
+        toastView.layer.cornerRadius = 10
         toastView.clipsToBounds  =  true
         
         //토스트라벨 세팅
         let toastLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 40))
         toastLabel.textColor = UIColor.white
         toastLabel.font = UIFont(name: "SourceHanSansKR-Bold", size: 14)
-        toastLabel.textAlignment = .center;
+        toastLabel.textAlignment = .center
         toastLabel.text = message
         toastLabel.alpha = 1.0
         toastLabel.numberOfLines = 2

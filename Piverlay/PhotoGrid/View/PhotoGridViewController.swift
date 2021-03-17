@@ -11,11 +11,10 @@ import Photos
 let screenWidth:CGFloat = UIScreen.main.bounds.width
 let screenHeigth:CGFloat = UIScreen.main.bounds.height
 
-class PhotoGridViewController: UIViewController {
+class PhotoGridViewController: BaseViewController {
 
     @IBOutlet weak var albumTitleLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var emptyView: UIView!
     
     private let photoGridPresenter = PhotoGridPresenter()
@@ -55,8 +54,6 @@ class PhotoGridViewController: UIViewController {
         
         //collectionView reusable Cell 등록
         collectionView.register(PhotoGridCell.self, forCellWithReuseIdentifier: "PhotoGridCollectionCell")
-  
-        activityIndicator.hidesWhenStopped = true
 
         //presenter를 이용한 View와 Data 세팅
         photoGridPresenter.attachView(view: self)
@@ -73,7 +70,7 @@ class PhotoGridViewController: UIViewController {
         super.viewWillAppear(animated)
         //썸네일 사이즈 세팅
         let scale = UIScreen.main.scale
-        let cellSize = (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
+        let cellSize = (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
         assetGridThumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
     }
     
@@ -85,7 +82,7 @@ class PhotoGridViewController: UIViewController {
 // MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 extension PhotoGridViewController:UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.photos.count
+        return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -112,8 +109,8 @@ extension PhotoGridViewController:UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //photoOverlayVC 선언
         let photoOverlayVC = PhotoOverlayViewController()
-        let asset = self.photos[indexPath.row]
-        photoOverlayVC.selectedAsset = asset;
+        let asset = photos[indexPath.row]
+        photoOverlayVC.selectedAsset = asset
       
         //present photoOverlayVC
         present(photoOverlayVC, animated: true, completion: nil)
@@ -123,29 +120,23 @@ extension PhotoGridViewController:UICollectionViewDelegate, UICollectionViewData
 
 extension PhotoGridViewController: PhotoGridView {
     func setPhotoGrid(photoGrid: PHFetchResult<PHAsset>) {
-        self.photos = photoGrid
+        photos = photoGrid
         collectionView.isHidden = false
         collectionView.reloadData()
     }
     
     func setEmptyPhotoGrid() {
         collectionView?.isHidden = true
-        emptyView?.isHidden = false;
+        emptyView?.isHidden = false
     }
     
     //start indicator
     func startLoading() {
-        activityIndicator.startAnimating()
-        activityIndicator.color = PLUtil.UIColorFromRGB(rgbValue: 0x3B8BF8)
-        activityIndicator.alpha = 1
-        activityIndicator.isHidden = false
+        startIndicator()
     }
 
     //finish indicator
     func finishLoading() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
-        }
+        stopIndicator()
     }
 }

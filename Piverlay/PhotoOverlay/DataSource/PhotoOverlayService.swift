@@ -20,19 +20,18 @@ class PhotoOverlayService {
     }
     
     func getOrgOverlayImageList(_ callBack: ([UIImage]) -> Void) {
-        for i in 1..<15 {
-            if(i < 10 ) {
-                let svg = URL(string: "https://mysvgimage.s3.ap-northeast-2.amazonaws.com/00" + "\(i)" + ".svg")!
-                let data = try? Data(contentsOf: svg)
-                let receivedimage: SVGKImage = SVGKImage(data: data)
-                overlayOrgImgaeList.append(receivedimage.uiImage)
-            } else if(i >= 10) {
-                let svg = URL(string: "https://mysvgimage.s3.ap-northeast-2.amazonaws.com/0" + "\(i)" + ".svg")!
-                let data = try? Data(contentsOf: svg)
-                let receivedimage: SVGKImage = SVGKImage(data: data)
-                overlayOrgImgaeList.append(receivedimage.uiImage)
+        var formattingNum : String
+        var index : Int = 1
+        while true {
+            formattingNum = String(format: "%03d", index)
+            let svgUrl = URL(string: "https://mysvgimage.s3.ap-northeast-2.amazonaws.com/" + formattingNum + ".svg")!
+            let data = try? Data(contentsOf: svgUrl)
+            if(data == nil) {
+                break;
             }
-            
+            let receivedimage: SVGKImage = SVGKImage(data: data)
+            overlayOrgImgaeList.append(receivedimage.uiImage)
+            index = index + 1
         }
         callBack(overlayOrgImgaeList)
     }

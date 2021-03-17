@@ -14,11 +14,10 @@ enum OverlayImageListType : String {
     case org = "origin"
 }
 
-class PhotoOverlayViewController: UIViewController {
+class PhotoOverlayViewController: BaseViewController {
     //IBOutlet
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var overlayButton: UIButton!
     // 선택된 이미지 Asset
@@ -35,6 +34,15 @@ class PhotoOverlayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //present를 통해 뷰 어태치
+        photoOverlayPresenter.attachView(view: self)
+        
+        //svg image를 번들에서 가져오는 방식
+        //photoOverlayPresenter.getOverlayImageList()
+        
+        //svg image를 서버에서 url을 통해 가져오는 방식
+        photoOverlayPresenter.getOrgOverlayImageList()
+
         // imageManager를 사용해 선택된 포토를 iMageView에 세팅
         imageMannger = PHCachingImageManager()
         imageMannger.requestImage(for: selectedAsset, targetSize: CGSize(width: imageView.frame.width, height: imageView.frame.height), contentMode: PHImageContentMode.aspectFill, options: nil) { (image, info) in
@@ -54,14 +62,8 @@ class PhotoOverlayViewController: UIViewController {
         //UITest를 위한 collectionView의 accessibilityIdentifier 세팅
         collectionView.accessibilityIdentifier = "overlayImageListCollectionViewIdentifier"
         
-        //present를 통해 뷰 어태치
-        photoOverlayPresenter.attachView(view: self)
-        
-        //svg image를 번들에서 가져오는 방식
-        //photoOverlayPresenter.getOverlayImageList()
-        
-        //svg image를 서버에서 url을 통해 가져오는 방식
-        photoOverlayPresenter.getOrgOverlayImageList()
+
+       
     }
 
     @IBAction func closeButtonTouched(_ sender: UIButton) {
@@ -111,7 +113,7 @@ class PhotoOverlayViewController: UIViewController {
 // MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 extension PhotoOverlayViewController:UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if(self.overlayImageListType == .str) {
+        if(overlayImageListType == .str) {
             return overlayImages.count
         } else {
             return overlayOrgImages.count
@@ -122,7 +124,7 @@ extension PhotoOverlayViewController:UICollectionViewDelegate, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SVGCollectionViewCell", for: indexPath) as! SVGCollectionViewCell
         //UITest를 위한 cell의 accessibilityIdentifier 세팅
         cell.accessibilityIdentifier = "overlayImageListCell_\(indexPath.row)"
-        if(self.overlayImageListType == .str) {
+        if(overlayImageListType == .str) {
             cell.imageView.image = UIImage(named: overlayImages[indexPath.row])
         } else {
             cell.imageView.image = overlayOrgImages[indexPath.row]
@@ -135,7 +137,7 @@ extension PhotoOverlayViewController:UICollectionViewDelegate, UICollectionViewD
         let bottomImage = imageView.image!
         var topImage: UIImage!
         
-        if(self.overlayImageListType == .str) {
+        if(overlayImageListType == .str) {
             topImage = UIImage(named: overlayImages[indexPath.row])
         } else {
             topImage = overlayOrgImages[indexPath.row]
@@ -159,29 +161,23 @@ extension PhotoOverlayViewController:UICollectionViewDelegate, UICollectionViewD
 extension PhotoOverlayViewController: PhotoOverlayView {
     //start indicator
     func startLoading() {
-        activityIndicator.startAnimating()
-        activityIndicator.color = PLUtil.UIColorFromRGB(rgbValue: 0x3B8BF8)
-        activityIndicator.alpha = 1
-        activityIndicator.isHidden = false
+        startIndicator()
     }
 
     //finish indicator
     func finishLoading() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
-        }
+        stopIndicator()
     }
 
     func setOverlayImageList(overlayImageList:[String]) {
-        self.overlayImages = overlayImageList
-        self.overlayImageListType = OverlayImageListType.str
-        self.collectionView.reloadData()
+        overlayImages = overlayImageList
+        overlayImageListType = OverlayImageListType.str
+        collectionView.reloadData()
     }
     
     func setOverlayOrgImageList(overlayOrgImageList:[UIImage]) {
-        self.overlayOrgImages = overlayOrgImageList
-        self.overlayImageListType = OverlayImageListType.org
-        self.collectionView.reloadData()
+        overlayOrgImages = overlayOrgImageList
+        overlayImageListType = OverlayImageListType.org
+        collectionView.reloadData()
     }
 }

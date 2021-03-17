@@ -8,10 +8,9 @@
 import UIKit
 import Photos
 
-class PhotoAlbumViewController: UIViewController {
+class PhotoAlbumViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private let photoAlbumPresenter = PhotoAlbumPresenter(photoAlbumService: PhotoAlbumService())
     var items:[PhotoAlbum] = []
@@ -53,8 +52,6 @@ class PhotoAlbumViewController: UIViewController {
         
         //tableView 관련 세팅
         tableView.separatorInset = UIEdgeInsets.zero
-        
-        activityIndicator.hidesWhenStopped = true
 
         //presenter를 이용한 View와 Data 세팅
         photoAlbumPresenter.attachView(view: self)
@@ -70,7 +67,7 @@ class PhotoAlbumViewController: UIViewController {
         let photos = PHPhotoLibrary.authorizationStatus()
         if photos == .notDetermined {
              PHPhotoLibrary.requestAuthorization({status in
-                 if status == .authorized{
+                 if status == .authorized {
                     //동의 callBack 후 UI를 Main Thread에서 처리하기 위해 DispatchQueue.main.async 사용
                     DispatchQueue.main.async {
                         self.photoAlbumPresenter.attachView(view: self)
@@ -109,7 +106,7 @@ extension PhotoAlbumViewController: PHPhotoLibraryChangeObserver {
 //MARK: - UITableViewDelegate & UItableVIewDataSource
 extension PhotoAlbumViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+        return items.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,7 +114,7 @@ extension PhotoAlbumViewController: UITableViewDelegate, UITableViewDataSource {
         let item = self.items[indexPath.row]
         let asset = self.items[indexPath.row].fetchResult.firstObject!
         imageMannger.requestImage(for: asset, targetSize: CGSize(width: 40.0, height: 40.0), contentMode: PHImageContentMode.aspectFill, options: nil) { (image, info) in
-            cell.imageView1.image = image
+            cell.photoImageView.image = image
 
         }
         let itemDic: Dictionary<String, String> = ["title" : item.title!, "count" : "(\(item.fetchResult.count))"]
@@ -151,28 +148,24 @@ extension PhotoAlbumViewController: UITableViewDelegate, UITableViewDataSource {
 extension PhotoAlbumViewController: PhotoAlbumView {
     //start indicator
     func startLoading() {
-        self.activityIndicator.startAnimating()
-        self.activityIndicator.color = PLUtil.UIColorFromRGB(rgbValue: 0x3B8BF8)
-        self.activityIndicator.alpha = 1
-        self.activityIndicator.isHidden = false
+        startIndicator()
     }
 
     //finish indicator
     func finishLoading() {
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.isHidden = true
+        stopIndicator()
     }
 
     //앨범 세팅 & 테이블 로딩
     func setPhotoAlbumList(photoAlbumList: [PhotoAlbum]) {
-        self.items = photoAlbumList
-        self.tableView.isHidden = false
-        self.tableView.reloadData()
+        items = photoAlbumList
+        tableView.isHidden = false
+        tableView.reloadData()
     }
 
     //Empty 화면
     func setEmptyPhotoAlbumList() {
-        self.tableView?.isHidden = true
-        self.emptyView?.isHidden = false;
+        tableView?.isHidden = true
+        emptyView?.isHidden = false
     }
 }

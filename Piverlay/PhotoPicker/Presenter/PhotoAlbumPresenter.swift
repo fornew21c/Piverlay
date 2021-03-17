@@ -21,7 +21,7 @@ protocol PhotoAlbumView: NSObjectProtocol {
 
 class PhotoAlbumPresenter {
     private let photoAlbumService: PhotoAlbumService
-    private var photoAlbumView: PhotoAlbumView?
+    private var photoAlbumView: PhotoAlbumView!
     
     init(photoAlbumService: PhotoAlbumService) {
         self.photoAlbumService = photoAlbumService
@@ -36,7 +36,7 @@ class PhotoAlbumPresenter {
     }
     
     func getPhotoAlbumList() {
-        self.photoAlbumView?.startLoading()
+        photoAlbumView.startLoading()
         photoAlbumService.getPhotoAlbumList { [weak self] photoAlbumList in
             self?.photoAlbumView?.finishLoading()
             if(photoAlbumList.count == 0) {

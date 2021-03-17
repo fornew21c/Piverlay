@@ -13,7 +13,7 @@ class PhotoAlbumCell: UITableViewCell {
     //Cell 내부 UI멤버변수
     var titleLabel: UILabel = UILabel()
     var countLabel: UILabel = UILabel()
-    var imageView1: UIImageView! = UIImageView()
+    var photoImageView: UIImageView! = UIImageView()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,11 +27,11 @@ class PhotoAlbumCell: UITableViewCell {
     
     func setupWithDictionary(_ dic: Dictionary<String, String>) {
         //Cell내 UI에 데이터 세팅
-        imageView1.frame = CGRect(x: 16, y: 10, width:60, height:60)
-        imageView1.layer.cornerRadius = 10
-        imageView1.contentMode = .scaleAspectFill
-        imageView1.clipsToBounds = true
-        self.addSubview(imageView1)
+        photoImageView.frame = CGRect(x: 16, y: 10, width:60, height:60)
+        photoImageView.layer.cornerRadius = 10
+        photoImageView.contentMode = .scaleAspectFill
+        photoImageView.clipsToBounds = true
+        self.addSubview(photoImageView)
         
         titleLabel.text = dic["title"]
         titleLabel.font = UIFont.systemFont(ofSize: 17)

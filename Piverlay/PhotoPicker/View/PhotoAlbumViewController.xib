@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoAlbumViewController" customModule="Piverlay" customModuleProvider="target">
             <connections>
-                <outlet property="activityIndicator" destination="TVV-Qq-nVR" id="LON-Lc-K7d"/>
                 <outlet property="emptyView" destination="xMV-aK-sA1" id="oHx-Im-1UL"/>
                 <outlet property="tableView" destination="6hf-w5-xvO" id="Cse-hC-D9R"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="qaz-NW-3bj"/>
@@ -19,20 +18,20 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPE-hS-Oam" userLabel="Title View">
-                    <rect key="frame" x="0.0" y="44" width="414" height="60"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Photo Album" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLb-NN-O9d">
-                            <rect key="frame" x="144.5" y="19.5" width="125.5" height="21"/>
+                            <rect key="frame" x="125" y="19.5" width="125" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFX-tB-btU">
-                            <rect key="frame" x="0.0" y="59" width="414" height="1"/>
+                            <rect key="frame" x="0.0" y="59" width="375" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="uWf-sd-WEo"/>
@@ -50,13 +49,13 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXB-wR-JY2" userLabel="Content View">
-                    <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                    <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xMV-aK-sA1">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="758"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no album." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jut-Aq-nOc">
-                                    <rect key="frame" x="129.5" y="367.5" width="155.5" height="23"/>
+                                    <rect key="frame" x="110" y="292" width="155" height="23"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -69,25 +68,20 @@
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6hf-w5-xvO">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="758"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <connections>
                                 <outlet property="dataSource" destination="i5M-Pr-FkT" id="sq4-WK-QhG"/>
                                 <outlet property="delegate" destination="i5M-Pr-FkT" id="U9W-u2-JKa"/>
                             </connections>
                         </tableView>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TVV-Qq-nVR">
-                            <rect key="frame" x="197" y="369" width="20" height="20"/>
-                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="xMV-aK-sA1" secondAttribute="trailing" id="FJA-FZ-KaO"/>
                         <constraint firstAttribute="bottom" secondItem="6hf-w5-xvO" secondAttribute="bottom" id="Kkd-bQ-hVW"/>
                         <constraint firstItem="6hf-w5-xvO" firstAttribute="leading" secondItem="KXB-wR-JY2" secondAttribute="leading" id="LKq-KZ-sgq"/>
-                        <constraint firstItem="TVV-Qq-nVR" firstAttribute="centerX" secondItem="KXB-wR-JY2" secondAttribute="centerX" id="Y3G-mb-jzB"/>
                         <constraint firstAttribute="bottom" secondItem="xMV-aK-sA1" secondAttribute="bottom" id="ZNp-ev-VLg"/>
-                        <constraint firstItem="TVV-Qq-nVR" firstAttribute="centerY" secondItem="KXB-wR-JY2" secondAttribute="centerY" id="dRO-5k-QCA"/>
                         <constraint firstItem="6hf-w5-xvO" firstAttribute="top" secondItem="KXB-wR-JY2" secondAttribute="top" id="fRZ-B2-O6W"/>
                         <constraint firstAttribute="trailing" secondItem="6hf-w5-xvO" secondAttribute="trailing" id="iwh-Wx-jGM"/>
                         <constraint firstItem="xMV-aK-sA1" firstAttribute="top" secondItem="KXB-wR-JY2" secondAttribute="top" id="rpg-no-jyB"/>
@@ -106,7 +100,7 @@
                 <constraint firstItem="KXB-wR-JY2" firstAttribute="top" secondItem="mPE-hS-Oam" secondAttribute="bottom" id="Xs0-IC-YX8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mPE-hS-Oam" secondAttribute="trailing" id="v29-H3-To0"/>
             </constraints>
-            <point key="canvasLocation" x="-4912" y="-364"/>
+            <point key="canvasLocation" x="-6503" y="-372"/>
         </view>
     </objects>
     <resources>

@@ -21,6 +21,7 @@ protocol PhotoOverlayView: NSObjectProtocol {
 class PhotoOverlayPresenter {
     private let photoOverlayService: PhotoOverlayService
     private var photoOverlayView: PhotoOverlayView?
+    var receivedOverlayOrgImgaeList : [UIImage] = []
     
     //init 함수
     init(photoOverlayService: PhotoOverlayService) {
@@ -37,9 +38,9 @@ class PhotoOverlayPresenter {
     
     //합성이미지 리스트 get함수
     func getOverlayImageList() {
-        self.photoOverlayView?.startLoading()
+        photoOverlayView?.startLoading()
         photoOverlayService.getOverlayImageList { [weak self] overlayImageList in
-            self?.photoOverlayView?.finishLoading()
+            photoOverlayView?.finishLoading()
             if(overlayImageList.count != 0) {
                 //합성할 이미지가 있는 경우
                 self?.photoOverlayView?.setOverlayImageList(overlayImageList: overlayImageList)
@@ -48,13 +49,37 @@ class PhotoOverlayPresenter {
     }
     
     func getOrgOverlayImageList() {
-        self.photoOverlayView?.startLoading()
-        photoOverlayService.getOrgOverlayImageList { [weak self] overlayOrgImageList in
-            self?.photoOverlayView?.finishLoading()
-            if(overlayOrgImageList.count != 0) {
-                //합성할 이미지가 있는 경우
-                self?.photoOverlayView?.setOverlayOrgImageList(overlayOrgImageList: overlayOrgImageList)
+        photoOverlayView?.startLoading()
+        DispatchQueue.global(qos: .default).async(execute: { [self] in
+            // 작업이 오래 걸리는 API를 백그라운드 스레드에서 실행한다.
+            self.photoOverlayService.getOrgOverlayImageList { [weak self] overlayOrgImageList in
+                self?.photoOverlayView?.finishLoading()
+                self?.receivedOverlayOrgImgaeList = overlayOrgImageList
+                
             }
-        }
+            DispatchQueue.main.async(execute: { [self] in
+                // 이 블럭은 메인스레드(UI)에서 실행된다.
+                if(self.receivedOverlayOrgImgaeList.count != 0) {
+                    //합성할 이미지가 있는 경우
+                    
+                    self.photoOverlayView?.setOverlayOrgImageList(overlayOrgImageList: self.receivedOverlayOrgImgaeList)
+                    self.photoOverlayView?.finishLoading()
+                }
+            })
+        })
+        
+        // 비동기 처리
+//        DispatchQueue.main.async {
+//            self.photoOverlayService.getOrgOverlayImageList { [weak self] overlayOrgImageList in
+//                self?.photoOverlayView?.finishLoading()
+//                if(overlayOrgImageList.count != 0) {
+//                    //합성할 이미지가 있는 경우
+//                    //self?.photoOverlayView?.setOverlayOrgImageList(overlayOrgImageList: overlayOrgImageList)
+//                }
+//            }
+ //       }
+            
+//
+
     }
 }

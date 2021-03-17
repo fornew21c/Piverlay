@@ -25,6 +25,7 @@ class PhotoAlbumService {
         albumList.sort { (item1, item2) -> Bool in
             return item1.fetchResult.count > item2.fetchResult.count
         }
+        
         callBack(self.albumList)
     }
     

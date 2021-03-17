@@ -30,17 +30,17 @@ class ResizeInputView: UIView {
         widthTextField.delegate = self
         heightTextField.delegate = self
         
-        inputValueView.layer.masksToBounds = false;
+        inputValueView.layer.masksToBounds = false
         inputValueView.layer.borderColor = UIColor.white.cgColor
         inputValueView.layer.shadowOffset = CGSize(width: 0, height: 12)
         
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        backgroundColor = UIColor.black.withAlphaComponent(0.3)
     }
     
     // InputValueView 외부 터치
     @IBAction func touchOutside(_ sender: UIButton) {
         //뷰 제거
-        self.removeFromSuperview()
+        removeFromSuperview()
     }
     
     //OK 버튼 터치
@@ -102,7 +102,7 @@ extension ResizeInputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         outsideButton.isUserInteractionEnabled = false
         tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.addGestureRecognizer(tap!)
+        addGestureRecognizer(tap!)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -114,7 +114,7 @@ extension ResizeInputView: UITextFieldDelegate {
         else {
             heightTextField.resignFirstResponder()
         }
-        self.removeGestureRecognizer(tap!)
+        removeGestureRecognizer(tap!)
         return true
     }
     
@@ -125,7 +125,7 @@ extension ResizeInputView: UITextFieldDelegate {
         heightTextField.resignFirstResponder()
         
         if let tap = tap {
-            self.removeGestureRecognizer(tap)
+            removeGestureRecognizer(tap)
         }
     }
 }
