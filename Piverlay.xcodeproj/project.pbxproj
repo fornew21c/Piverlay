@@ -35,6 +35,7 @@
 		FE68E0CD25F6F2A5004CC11C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE68E0CC25F6F2A5004CC11C /* ViewController.swift */; };
 		FE68E0D525F6F945004CC11C /* ResizeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE68E0D425F6F945004CC11C /* ResizeInputView.swift */; };
 		FE68E0DA25F6F972004CC11C /* ResizeInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE68E0D925F6F972004CC11C /* ResizeInputView.xib */; };
+		FE922A7B260224F100F01017 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE922A7A260224F100F01017 /* GlobalVariables.swift */; };
 		FEB4FB882601A33600D9EB84 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB4FB872601A33500D9EB84 /* BaseViewController.swift */; };
 		FEFDCD9225F65C8C0081E9BA /* PhotoGridPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFDCD9125F65C8C0081E9BA /* PhotoGridPresenter.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,7 @@
 		FE68E0CC25F6F2A5004CC11C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../Piverlay/Piverlay/ViewController.swift; sourceTree = "<group>"; };
 		FE68E0D425F6F945004CC11C /* ResizeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeInputView.swift; sourceTree = "<group>"; };
 		FE68E0D925F6F972004CC11C /* ResizeInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResizeInputView.xib; sourceTree = "<group>"; };
+		FE922A7A260224F100F01017 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		FEB4FB872601A33500D9EB84 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FEFDCD9125F65C8C0081E9BA /* PhotoGridPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,6 +228,7 @@
 		FE33E20625F41406003CBF05 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				FE922A7A260224F100F01017 /* GlobalVariables.swift */,
 				FE33E20B25F414F9003CBF05 /* PLUtil.swift */,
 			);
 			path = Util;
@@ -600,6 +603,7 @@
 				FE33E1ED25F3E036003CBF05 /* PhotoGridCell.swift in Sources */,
 				FEFDCD9225F65C8C0081E9BA /* PhotoGridPresenter.swift in Sources */,
 				FE33E20125F40088003CBF05 /* SVGCollectionViewCell.swift in Sources */,
+				FE922A7B260224F100F01017 /* GlobalVariables.swift in Sources */,
 				FE68E06325F6832A004CC11C /* PhotoOverlayPresenter.swift in Sources */,
 				FE33E1E325F3DE30003CBF05 /* PhotoAlbumCell.swift in Sources */,
 				FE33E20C25F414F9003CBF05 /* PLUtil.swift in Sources */,
@@ -776,7 +780,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P8KRZA7924;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Piverlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -800,7 +804,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P8KRZA7924;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Piverlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -822,7 +826,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8KRZA7924;
 				INFOPLIST_FILE = PiverlayUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -843,7 +847,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8KRZA7924;
 				INFOPLIST_FILE = PiverlayUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -865,7 +869,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8KRZA7924;
 				INFOPLIST_FILE = PiverlayTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -887,7 +891,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8KRZA7924;
 				INFOPLIST_FILE = PiverlayTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
