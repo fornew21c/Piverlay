@@ -9,22 +9,15 @@
 import UIKit
 
 class PhotoAlbumCell: UITableViewCell {
-
     //Cell 내부 UI멤버변수
     var titleLabel: UILabel = UILabel()
     var countLabel: UILabel = UILabel()
     var photoImageView: UIImageView! = UIImageView()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
     }
-    
+
     func setupWithDictionary(_ dic: Dictionary<String, String>) {
         //Cell내 UI에 데이터 세팅
         photoImageView.frame = CGRect(x: 16, y: 10, width:60, height:60)

@@ -31,8 +31,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePY-HX-OoU" userLabel="Input Value View">
                     <rect key="frame" x="24" y="311" width="363" height="274"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input value to resize" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bh4-aw-RVk">
-                            <rect key="frame" x="23" y="20" width="215" height="35"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input values to resize" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bh4-aw-RVk">
+                            <rect key="frame" x="23" y="20" width="250.5" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="Uqs-Bx-9O1"/>
                             </constraints>
@@ -41,15 +41,16 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="width" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REL-I1-4zG">
-                            <rect key="frame" x="15" y="69" width="29.5" height="29"/>
+                            <rect key="frame" x="15" y="69" width="59" height="29"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="59" id="EKT-n2-vfL"/>
                                 <constraint firstAttribute="height" constant="29" id="myT-X7-Tml"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SourceHanSansKR-Bold" family="Source Han Sans KR" pointSize="12"/>
                             <color key="textColor" red="0.23137254900000001" green="0.23137254900000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xhU-jS-xQW" userLabel="Width Text Field">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xhU-jS-xQW" userLabel="Width Text Field">
                             <rect key="frame" x="15" y="98" width="327" height="34"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -60,15 +61,16 @@
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFr-dz-rKr">
-                            <rect key="frame" x="15" y="145" width="33.5" height="29"/>
+                            <rect key="frame" x="15" y="145" width="38.5" height="29"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="38.5" id="PgT-uL-kfh"/>
                                 <constraint firstAttribute="height" constant="29" id="V1X-z0-WzM"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SourceHanSansKR-Bold" family="Source Han Sans KR" pointSize="12"/>
                             <color key="textColor" red="0.23137254900000001" green="0.23137254900000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VA0-Wy-ROz" userLabel="Height Text Field">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VA0-Wy-ROz" userLabel="Height Text Field">
                             <rect key="frame" x="15" y="178" width="327" height="34"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -171,7 +173,7 @@
                 <outlet property="outsideButton" destination="J9l-li-cDS" id="TvO-AY-EnZ"/>
                 <outlet property="widthTextField" destination="xhU-jS-xQW" id="VX6-5a-BYF"/>
             </connections>
-            <point key="canvasLocation" x="-6739" y="-395"/>
+            <point key="canvasLocation" x="-6739.130434782609" y="-395.08928571428572"/>
         </view>
     </objects>
 </document>

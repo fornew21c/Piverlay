@@ -18,14 +18,19 @@ class ResizeInputView: UIView {
     var tap : UITapGestureRecognizer?
     var beforeImage: UIImage!
     
+    private let photoOverlayPresenter = PhotoOverlayPresenter(photoOverlayService: PhotoOverlayService())
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         //TextField layer 세팅
         widthTextField.layer.cornerRadius = 17.5
         widthTextField.layer.borderWidth = 1
+        widthTextField.setLeftPaddingPoints(10)
+        
         heightTextField.layer.cornerRadius = 17.5
         heightTextField.layer.borderWidth = 1
+        heightTextField.setLeftPaddingPoints(10)
         
         widthTextField.delegate = self
         heightTextField.delegate = self
@@ -46,12 +51,12 @@ class ResizeInputView: UIView {
     //OK 버튼 터치
     @IBAction func OKButtonTouched(_ sender: UIButton) {
         if widthTextField.text == "" || heightTextField.text == "" {
-            PLUtil.showToastBlackBottomWith(message: "Please input Value!", bottomHeight: 60)
+            PLUtil.showToastBlackBottomWith(message: "Please input Value!", bottomHeight: 250)
             return
         }
         if let width = widthTextField?.text, let height = heightTextField?.text {
             // 이미지 해상도 변경
-            let resizedImage = resizeImage(image: beforeImage, targetSize: CGSize(width: Int(width)!, height: Int(height)!))
+            let resizedImage = photoOverlayPresenter.resizeImage(image: beforeImage, targetSize: CGSize(width: Int(width)!, height: Int(height)!))
             UIImageWriteToSavedPhotosAlbum(resizedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
         }
         //화면에서 뷰제거
@@ -71,30 +76,6 @@ class ResizeInputView: UIView {
             }
         }
     }
-    
-    //image 사이즈 조절 함수
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        let widthRatio = targetSize.width / size.width
-        let heightRatio = targetSize.height / size.height
-        // 새롭게 변경될 사이즈
-        var newSize: CGSize
-        if(widthRatio > heightRatio){
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio) }
-        else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-        }
-        // 새로운 사이즈의 rect
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        // 리사이징 작업
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        // 리사이징한 이미지
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
-    }
-    
 }
 
 // MARK: - UITextFieldDelegate
@@ -127,5 +108,13 @@ extension ResizeInputView: UITextFieldDelegate {
         if let tap = tap {
             removeGestureRecognizer(tap)
         }
+    }
+}
+
+extension UITextField {
+    func setLeftPaddingPoints(_ amount:CGFloat){
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
     }
 }

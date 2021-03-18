@@ -12,15 +12,13 @@ class PhotoAlbumViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIView!
     
-    private let photoAlbumPresenter = PhotoAlbumPresenter(photoAlbumService: PhotoAlbumService())
-    var items:[PhotoAlbum] = []
-    var imageMannger: PHCachingImageManager!
+    fileprivate let photoAlbumPresenter = PhotoAlbumPresenter(photoAlbumService: PhotoAlbumService())
+    fileprivate var albumsToDisplay = [PhotoAlbum]()
+//    fileprivate albumsToDisplay:[PhotoAlbum] = []
     
     init() {
         super.init(nibName: nil, bundle: nil)
         
-        //이미지매니저 초기화
-        imageMannger = PHCachingImageManager()
         //observer 등록
         PHPhotoLibrary.shared().register(self)
     }
@@ -54,7 +52,7 @@ class PhotoAlbumViewController: BaseViewController {
         tableView.separatorInset = UIEdgeInsets.zero
 
         //presenter를 이용한 View와 Data 세팅
-        photoAlbumPresenter.attachView(view: self)
+        photoAlbumPresenter.setViewDelegate(photoAlbumViewDelegate: self)
         photoAlbumPresenter.getPhotoAlbumList()
     }
     
@@ -64,17 +62,15 @@ class PhotoAlbumViewController: BaseViewController {
     
     //앨범 접근 permission 얼럿 노출 함수 구현: 최초 허용 후 바로 앨범리스트 가져 올 수 있도록 구현
     func checkPhotoLibraryPermission() {
-        let photos = PHPhotoLibrary.authorizationStatus()
-        if photos == .notDetermined {
+        let photoPermission = PHPhotoLibrary.authorizationStatus()
+        if photoPermission == .notDetermined {
              PHPhotoLibrary.requestAuthorization({status in
                  if status == .authorized {
                     //동의 callBack 후 UI를 Main Thread에서 처리하기 위해 DispatchQueue.main.async 사용
                     DispatchQueue.main.async {
-                        self.photoAlbumPresenter.attachView(view: self)
+                        self.photoAlbumPresenter.setViewDelegate(photoAlbumViewDelegate: self)
                         self.photoAlbumPresenter.getPhotoAlbumList()
                     }
-                 } else {
-                    
                  }
              })
          }
@@ -85,9 +81,9 @@ class PhotoAlbumViewController: BaseViewController {
 extension PhotoAlbumViewController: PHPhotoLibraryChangeObserver {
     public func photoLibraryDidChange(_ changeInstance: PHChange) {
         DispatchQueue.global().async {
-            let updateSectionFetchResults = self.items
+            let updateSectionFetchResults = self.albumsToDisplay
             var reloadRequired = false
-            for (index, item) in self.items.enumerated() {
+            for (index, item) in self.albumsToDisplay.enumerated() {
                 if let changeDetails = changeInstance.changeDetails(for: item.fetchResult as! PHFetchResult<PHObject>) {
                     updateSectionFetchResults[index].fetchResult = changeDetails.fetchResultAfterChanges as! PHFetchResult<PHAsset>
                     reloadRequired = true
@@ -95,7 +91,7 @@ extension PhotoAlbumViewController: PHPhotoLibraryChangeObserver {
             }
             if reloadRequired {
                 DispatchQueue.main.async(execute: {
-                    self.items = updateSectionFetchResults
+                    self.albumsToDisplay = updateSectionFetchResults
                     self.tableView.reloadData()
                 })
             }
@@ -106,46 +102,33 @@ extension PhotoAlbumViewController: PHPhotoLibraryChangeObserver {
 //MARK: - UITableViewDelegate & UItableVIewDataSource
 extension PhotoAlbumViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return photoAlbumPresenter.photoAlbumListCount
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView .dequeueReusableCell(withIdentifier: "PhotoAlbumCell", for: indexPath) as! PhotoAlbumCell
-        let item = self.items[indexPath.row]
-        let asset = self.items[indexPath.row].fetchResult.firstObject!
-        imageMannger.requestImage(for: asset, targetSize: CGSize(width: 40.0, height: 40.0), contentMode: PHImageContentMode.aspectFill, options: nil) { (image, info) in
-            cell.photoImageView.image = image
-
-        }
-        let itemDic: Dictionary<String, String> = ["title" : item.title!, "count" : "(\(item.fetchResult.count))"]
-        
-        //UITest를 위한 cell의 accessibilityIdentifier 세팅
-        cell.accessibilityIdentifier = "PhotoAlbumCell_\(indexPath.row)"
-        
-        //Cell 데이터 세팅 함수 호출
-        cell.setupWithDictionary(itemDic)
+        photoAlbumPresenter.configure(cell: cell, row: indexPath.row)
         return cell
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // photoGridVC 선언
-        let photoGridVC = PhotoGridViewController()
-        
-        // 사진리스트와 앨범제목 세팅
-        photoGridVC.photos = self.items[indexPath.row].fetchResult
-        photoGridVC.albumTitle = self.items[indexPath.row].title!
-        
-        // push VewController
-        self.navigationController?.pushViewController(photoGridVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: false)
+   
+        // presenter 세팅
+        let photoGridService = PhotoGridService()
+        photoGridService.setPhotoGridList(photoGridList: albumsToDisplay[indexPath.row].fetchResult)
+        let photoGridPresenter: PhotoGridPresenter = PhotoGridPresenter(photoGridService: photoGridService)
+        let albumTitle = albumsToDisplay[indexPath.row].title!
+        
+        pushPhotoList(nextPresenter: photoGridPresenter, title:albumTitle)
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return GlobalVariables.sharedInstance.photoAlbumTableViewCellHeight
     }
 }
 
-extension PhotoAlbumViewController: PhotoAlbumView {
+extension PhotoAlbumViewController: PhotoAlbumViewDelegate {
     //start indicator
     func startLoading() {
         startIndicator()
@@ -158,7 +141,7 @@ extension PhotoAlbumViewController: PhotoAlbumView {
 
     //앨범 세팅 & 테이블 로딩
     func setPhotoAlbumList(photoAlbumList: [PhotoAlbum]) {
-        items = photoAlbumList
+        albumsToDisplay = photoAlbumList
         tableView.isHidden = false
         tableView.reloadData()
     }
@@ -167,5 +150,19 @@ extension PhotoAlbumViewController: PhotoAlbumView {
     func setEmptyPhotoAlbumList() {
         tableView?.isHidden = true
         emptyView?.isHidden = false
+    }
+    
+    func pushPhotoList(nextPresenter: PhotoGridPresenter, title:String) {
+        // photoGridVC 선언 & presenter 세팅
+        let photoGridVC = PhotoGridViewController()
+        photoGridVC.photoGridPresenter = nextPresenter
+        photoGridVC.albumTitle = title
+        
+        // push VewController
+        navigationController?.pushViewController(photoGridVC, animated: true)
+    }
+    
+    func reload() {
+        tableView.reloadData()
     }
 }

@@ -8,8 +8,6 @@
 import UIKit
 import Photos
 
-let screenWidth:CGFloat = UIScreen.main.bounds.width
-let screenHeigth:CGFloat = UIScreen.main.bounds.height
 
 class PhotoGridViewController: BaseViewController {
 
@@ -17,19 +15,17 @@ class PhotoGridViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var emptyView: UIView!
     
-    private let photoGridPresenter = PhotoGridPresenter()
-
+    var photoGridPresenter = PhotoGridPresenter(photoGridService: PhotoGridService())
+    fileprivate var photosToDisplay = PHFetchResult<PHAsset>()
+    //fileprivate var photosToDisplay: PHFetchResult<PHAsset>?
     var albumTitle: String!
-    var photos: PHFetchResult<PHAsset>!
-    
+
     //이미지매니저 선언
     var imageMannger: PHCachingImageManager!
     ///썸네일 이미지 사이즈
-    open var assetGridThumbnailSize: CGSize!
+    open var photoGridThumbnailSize: CGSize!
     //원본이미지 사이즈
     var realImageSize: CGSize!
-    ///与缓存Rect
-    var previousPreheatRect: CGRect!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +41,7 @@ class PhotoGridViewController: BaseViewController {
         collectionView.accessibilityIdentifier = "photoGridListCollectionViewIdentifier"
         
         //CollectionViewLayout 세팅
+        let screenWidth:CGFloat = UIScreen.main.bounds.width
         let collectionLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionLayout.minimumLineSpacing = 20
         collectionLayout.minimumInteritemSpacing = 5
@@ -56,22 +53,22 @@ class PhotoGridViewController: BaseViewController {
         collectionView.register(PhotoGridCell.self, forCellWithReuseIdentifier: "PhotoGridCollectionCell")
 
         //presenter를 이용한 View와 Data 세팅
-        photoGridPresenter.attachView(view: self)
-        
-        if photos == nil {
-            //사진데이터를 정상적으로 가져오지 못한 경우 모든 옵션의 사진을 가져옴
-            let allPhotoOption = PHFetchOptions()
-            allPhotoOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-            photos = PHAsset.fetchAssets(with: allPhotoOption)
-        }
+        photoGridPresenter.setViewDelegate(photoGridViewDelegate: self)
+        photoGridPresenter.getPhotoAlbumList()
+//        if photosToDisplay == nil {
+//            //사진데이터를 정상적으로 가져오지 못한 경우 모든 옵션의 사진을 가져옴
+//            let allPhotoOption = PHFetchOptions()
+//            allPhotoOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+//            photosToDisplay = PHAsset.fetchAssets(with: allPhotoOption)
+//        }
+        let scale = UIScreen.main.scale
+        let cellSize = (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
+        photoGridThumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //썸네일 사이즈 세팅
-        let scale = UIScreen.main.scale
-        let cellSize = (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
-        assetGridThumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
     }
     
     @IBAction func backButtonTouched(_ sender: UIButton) {
@@ -82,50 +79,32 @@ class PhotoGridViewController: BaseViewController {
 // MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 extension PhotoGridViewController:UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return photoGridPresenter.photoGridListCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoGridCollectionCell", for: indexPath) as! PhotoGridCell
-        cell.imageView.layer.cornerRadius = 15
+        photoGridPresenter.configure(cell: cell, row: indexPath.row, photoGridThumbnailSize: photoGridThumbnailSize)
         
-        //UITest를 위한 cell의 accessibilityIdentifier 세팅
-        cell.accessibilityIdentifier = "PhotoGridListCell_\(indexPath.row)"
-        
-        let asset = self.photos[indexPath.row]
-        imageMannger.requestImage(for: asset, targetSize: assetGridThumbnailSize, contentMode: PHImageContentMode.aspectFill, options: nil) { (image, info) in
-            cell.imageView.image = image
-            //비디오인 경우 플레잉시간 표시
-            switch asset.mediaType {
-                case .video:
-                    cell.duration = asset.duration
-                default:
-                    break
-            }
-        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //photoOverlayVC 선언
-        let photoOverlayVC = PhotoOverlayViewController()
-        let asset = photos[indexPath.row]
-        photoOverlayVC.selectedAsset = asset
-      
-        //present photoOverlayVC
-        present(photoOverlayVC, animated: true, completion: nil)
         collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let selectedPhoto = photosToDisplay[indexPath.row]
+        presentOverlayView(selectedPhoto: selectedPhoto)
     }
 }
 
-extension PhotoGridViewController: PhotoGridView {
-    func setPhotoGrid(photoGrid: PHFetchResult<PHAsset>) {
-        photos = photoGrid
+extension PhotoGridViewController: PhotoGridViewDelegate {    
+    func setPhotoGridList(photoGridList: PHFetchResult<PHAsset>) {
+        photosToDisplay = photoGridList
         collectionView.isHidden = false
         collectionView.reloadData()
     }
     
-    func setEmptyPhotoGrid() {
+    func setEmptyPhotoGridList() {
         collectionView?.isHidden = true
         emptyView?.isHidden = false
     }
@@ -138,5 +117,16 @@ extension PhotoGridViewController: PhotoGridView {
     //finish indicator
     func finishLoading() {
         stopIndicator()
+    }
+    
+    func reload() {
+        collectionView.reloadData()
+    }
+    
+    func presentOverlayView(selectedPhoto: PHAsset!) {
+        //present photoOverlayVC
+        let photoOverlayVC = PhotoOverlayViewController()
+        photoOverlayVC.selectedPhoto = selectedPhoto
+        present(photoOverlayVC, animated: true, completion: nil)
     }
 }

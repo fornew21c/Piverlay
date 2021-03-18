@@ -8,9 +8,11 @@
 
 import UIKit
 
+// 프로젝트 전역에서 사용될 글로벌 변수 : 싱글톤 방식
 class GlobalVariables: NSObject {
     static let sharedInstance = GlobalVariables()
     
     var overlayOrgImgaeList : [UIImage] = []
-   // var apiURL: String = "http://rw-demo.ap-northeast-2.elasticbeanstalk.com/console/v1/api/rwApp"
+    let svgImgURL: String = "https://mysvgimage.s3.ap-northeast-2.amazonaws.com/"
+    let photoAlbumTableViewCellHeight : CGFloat = 80
 }

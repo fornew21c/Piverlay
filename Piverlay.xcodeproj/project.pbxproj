@@ -37,6 +37,7 @@
 		FE68E0DA25F6F972004CC11C /* ResizeInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE68E0D925F6F972004CC11C /* ResizeInputView.xib */; };
 		FE922A7B260224F100F01017 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE922A7A260224F100F01017 /* GlobalVariables.swift */; };
 		FEB4FB882601A33600D9EB84 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB4FB872601A33500D9EB84 /* BaseViewController.swift */; };
+		FEE7D2222602F31D009EE71B /* PhotoGridService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE7D2212602F31D009EE71B /* PhotoGridService.swift */; };
 		FEFDCD9225F65C8C0081E9BA /* PhotoGridPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFDCD9125F65C8C0081E9BA /* PhotoGridPresenter.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		FE68E0D925F6F972004CC11C /* ResizeInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResizeInputView.xib; sourceTree = "<group>"; };
 		FE922A7A260224F100F01017 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		FEB4FB872601A33500D9EB84 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		FEE7D2212602F31D009EE71B /* PhotoGridService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridService.swift; sourceTree = "<group>"; };
 		FEFDCD9125F65C8C0081E9BA /* PhotoGridPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +210,7 @@
 		FE33E1E525F3DFB2003CBF05 /* PhotoGrid */ = {
 			isa = PBXGroup;
 			children = (
+				FEE7D2152602EE4A009EE71B /* DataSource */,
 				FE92B75025F6586000A1C2DF /* Presenter */,
 				FE92B75125F6586000A1C2DF /* View */,
 			);
@@ -253,9 +256,9 @@
 		FE33E21D25F5CD42003CBF05 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FE33E1E225F3DE30003CBF05 /* PhotoAlbumCell.swift */,
 				FE33E1DB25F3DC0E003CBF05 /* PhotoAlbumViewController.swift */,
 				FE33E1DC25F3DC0E003CBF05 /* PhotoAlbumViewController.xib */,
+				FE33E1E225F3DE30003CBF05 /* PhotoAlbumCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,6 +349,14 @@
 				FEB4FB872601A33500D9EB84 /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		FEE7D2152602EE4A009EE71B /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				FEE7D2212602F31D009EE71B /* PhotoGridService.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -596,6 +607,7 @@
 				FE33E1E825F3DFCB003CBF05 /* PhotoGridViewController.swift in Sources */,
 				FE33E22A25F5D2AD003CBF05 /* PhotoAlbumService.swift in Sources */,
 				FEB4FB882601A33600D9EB84 /* BaseViewController.swift in Sources */,
+				FEE7D2222602F31D009EE71B /* PhotoGridService.swift in Sources */,
 				FE33E1DD25F3DC0E003CBF05 /* PhotoAlbumViewController.swift in Sources */,
 				FE33E1FC25F3EE14003CBF05 /* PhotoOverlayViewController.swift in Sources */,
 				FE33E16225F3BC79003CBF05 /* AppDelegate.swift in Sources */,

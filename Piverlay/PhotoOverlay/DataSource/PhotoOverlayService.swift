@@ -24,7 +24,7 @@ class PhotoOverlayService {
         var index : Int = 1
         while true {
             formattingNum = String(format: "%03d", index)
-            let svgUrl = URL(string: "https://mysvgimage.s3.ap-northeast-2.amazonaws.com/" + formattingNum + ".svg")!
+            let svgUrl = URL(string: GlobalVariables.sharedInstance.svgImgURL + formattingNum + ".svg")!
             let data = try? Data(contentsOf: svgUrl)
             if(data == nil) {
                 break;

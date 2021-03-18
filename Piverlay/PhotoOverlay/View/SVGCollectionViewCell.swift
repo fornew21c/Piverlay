@@ -8,8 +8,6 @@
 import UIKit
 
 class SVGCollectionViewCell: UICollectionViewCell {
-
-  
     @IBOutlet weak var imageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

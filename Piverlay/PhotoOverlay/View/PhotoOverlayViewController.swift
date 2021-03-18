@@ -18,14 +18,14 @@ class PhotoOverlayViewController: BaseViewController {
     //IBOutlet
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var overlayButton: UIButton!
-    // 선택된 이미지 Asset
-    var selectedAsset: PHAsset!
+    
+    // 선택된 사진
+    var selectedPhoto: PHAsset!
     var overlayImages:[String] = []
     var overlayOrgImages:[UIImage] = []
     var overlayImageListType:OverlayImageListType!
-    // 이미지매니저
+    // 이미지 매니저
     var imageMannger: PHCachingImageManager!
     
     //photoOverlayPresenter
@@ -34,8 +34,8 @@ class PhotoOverlayViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //present를 통해 뷰 어태치
-        photoOverlayPresenter.attachView(view: self)
+        //set viewDelegate
+        photoOverlayPresenter.setViewDelegate(photoOverlayViewDelegate: self)
         
         //svg image를 번들에서 가져오는 방식
         //photoOverlayPresenter.getOverlayImageList()
@@ -45,7 +45,7 @@ class PhotoOverlayViewController: BaseViewController {
 
         // imageManager를 사용해 선택된 포토를 iMageView에 세팅
         imageMannger = PHCachingImageManager()
-        imageMannger.requestImage(for: selectedAsset, targetSize: CGSize(width: imageView.frame.width, height: imageView.frame.height), contentMode: PHImageContentMode.aspectFill, options: nil) { (image, info) in
+        imageMannger.requestImage(for: selectedPhoto, targetSize: CGSize(width: imageView.frame.width, height: imageView.frame.height), contentMode: PHImageContentMode.aspectFill, options: nil) { (image, info) in
             self.imageView.image = image
         }
         
@@ -61,9 +61,6 @@ class PhotoOverlayViewController: BaseViewController {
         
         //UITest를 위한 collectionView의 accessibilityIdentifier 세팅
         collectionView.accessibilityIdentifier = "overlayImageListCollectionViewIdentifier"
-        
-
-       
     }
 
     @IBAction func closeButtonTouched(_ sender: UIButton) {
@@ -83,7 +80,6 @@ class PhotoOverlayViewController: BaseViewController {
         if let unwrappedImage = imageView.image {
             showResizeInputViewWith(image:unwrappedImage)
         }
-       // showResizeInputView()
     }
     
     func showResizeInputViewWith(image:UIImage) {
@@ -122,18 +118,12 @@ extension PhotoOverlayViewController:UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SVGCollectionViewCell", for: indexPath) as! SVGCollectionViewCell
-        //UITest를 위한 cell의 accessibilityIdentifier 세팅
-        cell.accessibilityIdentifier = "overlayImageListCell_\(indexPath.row)"
-        if(overlayImageListType == .str) {
-            cell.imageView.image = UIImage(named: overlayImages[indexPath.row])
-        } else {
-            cell.imageView.image = overlayOrgImages[indexPath.row]
-        }
+        photoOverlayPresenter.configure(cell: cell, row: indexPath.row, overlayImageListType: overlayImageListType)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // 사진 합성
+        // 합성할 사진 가져오기
         let bottomImage = imageView.image!
         var topImage: UIImage!
         
@@ -142,23 +132,13 @@ extension PhotoOverlayViewController:UICollectionViewDelegate, UICollectionViewD
         } else {
             topImage = overlayOrgImages[indexPath.row]
         }
-
-        let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
-        UIGraphicsBeginImageContext(size)
-    
-        let bottomAreaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        let topAreaSize = CGRect(x: bottomImage.size.width/2 - 150, y: bottomImage.size.height/2 - 150, width: 300, height: 300)
-        bottomImage.draw(in: bottomAreaSize)
-        topImage!.draw(in: topAreaSize, blendMode: .normal, alpha: 1)
-
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
         
-        imageView.image = newImage
+        // 이미지 합성 함수 호출
+        imageView.image = photoOverlayPresenter.makeOverlayedImage(bottomImage: bottomImage, topImage: topImage)
     }
 }
 
-extension PhotoOverlayViewController: PhotoOverlayView {
+extension PhotoOverlayViewController: PhotoOverlayViewDelegate {
     //start indicator
     func startLoading() {
         startIndicator()

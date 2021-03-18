@@ -8,7 +8,7 @@
 import Photos
 
 class PhotoAlbumService {
-    var albumList : [PhotoAlbum] = []
+    var photoAlbumList : [PhotoAlbum] = []
     
     func getPhotoAlbumList(_ callBack:@escaping ([PhotoAlbum]) -> Void) {
         let smartOptions = PHFetchOptions()
@@ -22,11 +22,11 @@ class PhotoAlbumService {
         self.makeAlbumList(topLevelUserCollections as! PHFetchResult<AnyObject>)
         
         // 앨범 사진갯수로 내림차순 정렬
-        albumList.sort { (item1, item2) -> Bool in
+        photoAlbumList.sort { (item1, item2) -> Bool in
             return item1.fetchResult.count > item2.fetchResult.count
         }
         
-        callBack(self.albumList)
+        callBack(self.photoAlbumList)
     }
     
     // 앨범리스트 생성 함수
@@ -40,7 +40,7 @@ class PhotoAlbumService {
             }
             let assetsFetchResult = PHAsset.fetchAssets(in: c , options: resultsOptions)
             if assetsFetchResult.count > 0 {
-                albumList.append(PhotoAlbum.init(title: c.localizedTitle, fetchResult: assetsFetchResult))
+                photoAlbumList.append(PhotoAlbum.init(title: c.localizedTitle, fetchResult: assetsFetchResult))
             }
         }
     }
