@@ -51,39 +51,25 @@ class PhotoOverlayPresenter {
     func getOrgOverlayImageList() {
         photoOverlayView?.startLoading()
         if( GlobalVariables.sharedInstance.overlayOrgImgaeList.count == 0) {
+            // 이미지 가져오기 비동기 처리
             DispatchQueue.global(qos: .default).async(execute: { [self] in
                 // 작업이 오래 걸리는 API를 백그라운드 스레드에서 실행한다.
                 self.photoOverlayService.getOrgOverlayImageList { [weak self] overlayOrgImageList in
                     self?.photoOverlayView?.finishLoading()
-                    //self?.receivedOverlayOrgImgaeList = overlayOrgImageList
                     GlobalVariables.sharedInstance.overlayOrgImgaeList = overlayOrgImageList
                 }
                 DispatchQueue.main.async(execute: { [self] in
-                    // 이 블럭은 메인스레드(UI)에서 실행된다.
-                    //if(self.receivedOverlayOrgImgaeList.count != 0) {
+                    // 이 블럭은 메인스레드(UI)에서 실행
+                    if(GlobalVariables.sharedInstance.overlayOrgImgaeList.count != 0) {
                         //합성할 이미지가 있는 경우
-                        self.photoOverlayView?.setOverlayOrgImageList(overlayOrgImageList: GlobalVariables.sharedInstance.overlayOrgImgaeList)
                         self.photoOverlayView?.finishLoading()
-                    //}
+                        self.photoOverlayView?.setOverlayOrgImageList(overlayOrgImageList: GlobalVariables.sharedInstance.overlayOrgImgaeList)
+                    }
                 })
             })
         } else {
-            self.photoOverlayView?.setOverlayOrgImageList(overlayOrgImageList: GlobalVariables.sharedInstance.overlayOrgImgaeList)
             self.photoOverlayView?.finishLoading()
+            self.photoOverlayView?.setOverlayOrgImageList(overlayOrgImageList: GlobalVariables.sharedInstance.overlayOrgImgaeList)
         }
-        
-        // 비동기 처리
-//        DispatchQueue.main.async {
-//            self.photoOverlayService.getOrgOverlayImageList { [weak self] overlayOrgImageList in
-//                self?.photoOverlayView?.finishLoading()
-//                if(overlayOrgImageList.count != 0) {
-//                    //합성할 이미지가 있는 경우
-//                    //self?.photoOverlayView?.setOverlayOrgImageList(overlayOrgImageList: overlayOrgImageList)
-//                }
-//            }
- //       }
-            
-//
-
     }
 }

@@ -62,7 +62,7 @@ class PhotoAlbumViewController: BaseViewController {
         super.viewWillAppear(animated)
     }
     
-    //앨범 접근 퍼미션 permission 얼럿 노출 함수 구현: 최초 허용 후 바로 앨범리스트 가져 올 수 있도록 구현
+    //앨범 접근 permission 얼럿 노출 함수 구현: 최초 허용 후 바로 앨범리스트 가져 올 수 있도록 구현
     func checkPhotoLibraryPermission() {
         let photos = PHPhotoLibrary.authorizationStatus()
         if photos == .notDetermined {
