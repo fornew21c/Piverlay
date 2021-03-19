@@ -32,7 +32,6 @@
 		FE68E07225F68C24004CC11C /* PiverlayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE68E07125F68C24004CC11C /* PiverlayUITests.swift */; };
 		FE68E08225F68C44004CC11C /* PiverlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE68E08125F68C44004CC11C /* PiverlayTests.swift */; };
 		FE68E0C525F6F23F004CC11C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE68E0C425F6F23F004CC11C /* Main.storyboard */; };
-		FE68E0CD25F6F2A5004CC11C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE68E0CC25F6F2A5004CC11C /* ViewController.swift */; };
 		FE68E0D525F6F945004CC11C /* ResizeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE68E0D425F6F945004CC11C /* ResizeInputView.swift */; };
 		FE68E0DA25F6F972004CC11C /* ResizeInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE68E0D925F6F972004CC11C /* ResizeInputView.xib */; };
 		FE922A7B260224F100F01017 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE922A7A260224F100F01017 /* GlobalVariables.swift */; };
@@ -96,7 +95,6 @@
 		FE68E08125F68C44004CC11C /* PiverlayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiverlayTests.swift; sourceTree = "<group>"; };
 		FE68E08325F68C44004CC11C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE68E0C425F6F23F004CC11C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		FE68E0CC25F6F2A5004CC11C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../Piverlay/Piverlay/ViewController.swift; sourceTree = "<group>"; };
 		FE68E0D425F6F945004CC11C /* ResizeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeInputView.swift; sourceTree = "<group>"; };
 		FE68E0D925F6F972004CC11C /* ResizeInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResizeInputView.xib; sourceTree = "<group>"; };
 		FE922A7A260224F100F01017 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 				FE33E16125F3BC79003CBF05 /* AppDelegate.swift */,
 				FE33E16A25F3BC7B003CBF05 /* Assets.xcassets */,
 				FE68E0C425F6F23F004CC11C /* Main.storyboard */,
-				FE68E0CC25F6F2A5004CC11C /* ViewController.swift */,
 				FE33E16C25F3BC7B003CBF05 /* LaunchScreen.storyboard */,
 				FE33E16F25F3BC7B003CBF05 /* Info.plist */,
 			);
@@ -619,7 +616,6 @@
 				FE68E06325F6832A004CC11C /* PhotoOverlayPresenter.swift in Sources */,
 				FE33E1E325F3DE30003CBF05 /* PhotoAlbumCell.swift in Sources */,
 				FE33E20C25F414F9003CBF05 /* PLUtil.swift in Sources */,
-				FE68E0CD25F6F2A5004CC11C /* ViewController.swift in Sources */,
 				FE33E22725F5D28A003CBF05 /* PhotoAlbumPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -798,7 +794,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wisetracker.piverlay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -822,7 +818,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wisetracker.piverlay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

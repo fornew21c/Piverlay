@@ -24,8 +24,6 @@ class PhotoGridViewController: BaseViewController {
     var imageMannger: PHCachingImageManager!
     ///썸네일 이미지 사이즈
     open var photoGridThumbnailSize: CGSize!
-    //원본이미지 사이즈
-    var realImageSize: CGSize!
     
     override func viewDidLoad() {
         super.viewDidLoad()
