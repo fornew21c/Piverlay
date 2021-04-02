@@ -26,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRP-74-Gxw">
-                            <rect key="frame" x="15" y="15" width="40" height="40"/>
+                            <rect key="frame" x="15" y="10" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="YhT-w0-l0p"/>
                                 <constraint firstAttribute="height" constant="40" id="dwz-VA-n0s"/>
@@ -56,10 +56,10 @@
                         <constraint firstAttribute="trailing" secondItem="4St-k7-QE0" secondAttribute="trailing" id="DfA-1T-E04"/>
                         <constraint firstItem="K8E-AH-121" firstAttribute="centerY" secondItem="Xrx-Vn-sXp" secondAttribute="centerY" id="GLh-sE-LDF"/>
                         <constraint firstAttribute="bottom" secondItem="4St-k7-QE0" secondAttribute="bottom" id="Jaq-pO-6A4"/>
+                        <constraint firstItem="JRP-74-Gxw" firstAttribute="centerY" secondItem="Xrx-Vn-sXp" secondAttribute="centerY" id="S7m-yO-HOc"/>
                         <constraint firstItem="4St-k7-QE0" firstAttribute="leading" secondItem="Xrx-Vn-sXp" secondAttribute="leading" id="jgE-Iz-IR6"/>
                         <constraint firstAttribute="height" constant="60" id="kme-rZ-vhg"/>
                         <constraint firstItem="JRP-74-Gxw" firstAttribute="leading" secondItem="Xrx-Vn-sXp" secondAttribute="leading" constant="15" id="l4v-gi-cev"/>
-                        <constraint firstItem="JRP-74-Gxw" firstAttribute="top" secondItem="Xrx-Vn-sXp" secondAttribute="top" constant="15" id="rc8-Un-OvB"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uGd-n7-fel" userLabel="Content View">
@@ -120,11 +120,11 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uGd-n7-fel" secondAttribute="trailing" id="p9j-KQ-exd"/>
                 <constraint firstItem="uGd-n7-fel" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sYE-KO-ks4"/>
             </constraints>
-            <point key="canvasLocation" x="-551" y="55"/>
+            <point key="canvasLocation" x="-849" y="-65"/>
         </view>
     </objects>
     <resources>
-        <image name="back" width="7" height="10"/>
+        <image name="back" width="16" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

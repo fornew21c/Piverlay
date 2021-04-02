@@ -8,7 +8,6 @@
 import UIKit
 import Photos
 
-
 class PhotoGridViewController: BaseViewController {
 
     @IBOutlet weak var albumTitleLabel: UILabel!
@@ -77,7 +76,7 @@ class PhotoGridViewController: BaseViewController {
 // MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 extension PhotoGridViewController:UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoGridPresenter.photoGridListCount
+        return photosToDisplay.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,6 +89,7 @@ extension PhotoGridViewController:UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
+       // let selectedPhoto = photoGridPresenter.photoGridService.photoGridList[indexPath.row]
         let selectedPhoto = photosToDisplay[indexPath.row]
         presentOverlayView(selectedPhoto: selectedPhoto)
     }

@@ -68,6 +68,7 @@ class PhotoGridPresenter {
                 case .video:
                     cell.duration = photoGrid.duration
                 default:
+                    cell.assistantLabel.isHidden = true
                     break
             }
         }
