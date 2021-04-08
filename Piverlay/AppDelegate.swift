@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         tabBarItem1?.image = UIImage(named:"gallery")
         
         tabBarItem2?.title = "AniFun"
-        tabBarItem2?.image = UIImage(named: "gallery")
+        tabBarItem2?.image = UIImage(named: "animation")
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.rootViewController = tabBarController

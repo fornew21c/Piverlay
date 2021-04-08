@@ -28,9 +28,3 @@
     <img src="https://screenshotwc.s3.ap-northeast-2.amazonaws.com/IMG_2389.PNG" alt="drawing" width="200"/> 
     
 
-## pf) Signing 정보
-- Xcode 계정: fornew21c@gmail.com
-- 비밀번호: Uib50s8a1!
-
-![](https://screenshotwc.s3.ap-northeast-2.amazonaws.com/codeSigning.png)
-      
